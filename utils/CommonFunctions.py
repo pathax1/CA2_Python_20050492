@@ -1,12 +1,28 @@
+# ***************************************************************************************************************************************************************************************
+# Function Names: highlight_element,iaction
+# Description: These functions are used to enhance the execution
+# Parameters: driver,element,colour,border_width,identifywith,iProperty,ivalue
+# Author:Aniket Pathare | 20050492@mydbs.ie
+# Precondition: User should be entering valid element identifier to proceed
+# Date Created: 2024-11-17
+# ***************************************************************************************************************************************************************************************
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
+
+# ***************************************************************************************************************************************************************************************
+# Function Names:highlight_element
+# Description:This function is used for highlighting the webelement on which the action or event is going to happen
+# Parameters:driver,element,colour,border_width
+# Author:Aniket Pathare | 20050492@mydbs.ie
+# Precondition:Element which needs to be highlighted a valid element identifier should be passed
+# Date Created: 2024-11-17
+# ***************************************************************************************************************************************************************************************
 def highlight_element(driver, element, color="red", border_width="3px"):
-    """
-    Highlights a Selenium WebElement by applying a border style.
-    """
+
     original_style = element.get_attribute("style")
     highlight_style = f"border: {border_width} solid {color};"
 
@@ -19,10 +35,16 @@ def highlight_element(driver, element, color="red", border_width="3px"):
     driver.execute_script(f"arguments[0].setAttribute('style', arguments[1]);", element, original_style)
 
 
+# ***************************************************************************************************************************************************************************************
+# Function Names:iaction
+# Description:This function is used for identifying the element using multiple parameters
+# Parameters:driver,element,colour,border_width
+# Author:Aniket Pathare | 20050492@mydbs.ie
+# Precondition:Element which needs to be highlighted a valid element identifier should be passed
+# Date Created: 2024-11-17
+# ***************************************************************************************************************************************************************************************
 def iaction(driver, element, identifywith, iProperty, ivalue=None):
-    """
-    Perform an action based on the element type, identification method, and value.
-    """
+
     # Define locator mapping
     locate_by = {
         "XPATH": By.XPATH,

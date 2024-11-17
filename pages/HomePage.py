@@ -15,7 +15,7 @@ from selenium.webdriver.common.keys import Keys
 # Description: The constructor is used to store all the Web Element Properties
 # Parameters: driver
 # Author:Aniket Pathare | 20050492@mydbs.ie
-# Precondition: User should populate the desired values to enter in the datasheet prior to the execution
+# Precondition: User should populate the desired values to enter the datasheet prior to the execution
 # Date Created: 2024-11-17
 # ***************************************************************************************************************************************************************************************
 class HomePage:
@@ -43,22 +43,34 @@ class HomePage:
 # Date Created: 2024-11-17
 # ***************************************************************************************************************************************************************************************
     def click_new_account(self,email,password,share):
-        # Call iaction with the correct parameters
+        # Click the 'Create New Account' button
         iaction(self.driver, "Button", "XPATH", self.iNewAccount)
         time.sleep(5)
+
+        # Enter the email address in the email input field
         iaction(self.driver, "Textbox", "XPATH", self.email_input, email)
+
+        # Enter the same email in the email confirmation field
         iaction(self.driver, "Textbox", "XPATH", self.email_input2, email)
+
+        # Enter the password in the password input field
         iaction(self.driver, "Textbox", "XPATH", self.password_input, password)
+
+        # Click the 'Submit' button to create the account
         iaction(self.driver, "Button", "XPATH", self.submit)
         time.sleep(5)
+
+        # Enter the company/share keyword in the search bar
         iaction(self.driver, "Textbox", "XPATH", self.iseachbar,share)
         time.sleep(5)
-        # Enter text into the search bar
-        search_bar = self.driver.find_element("xpath", self.iseachbar)  # Locate the search bar element
-        search_bar.send_keys(Keys.RETURN)  # Simulate pressing Enter
+
+        # Locate the search bar element and simulate pressing 'Enter'
+        search_bar = self.driver.find_element("xpath", self.iseachbar)
+        search_bar.send_keys(Keys.RETURN)
+
+        # Navigate to the 'Quarters' link section
         iaction(self.driver, "Hyperlink", "XPATH", self.imenuitem)
         time.sleep(5)
-
 
 # ***************************************************************************************************************************************************************************************
 # Function Name: extract_api
@@ -75,53 +87,59 @@ class HomePage:
 
     def extract_api(self):
         try:
-            # Get the current URL from the Selenium driver
+            # Step 1: Get the current URL from the Selenium driver
             url = self.driver.current_url
 
-            # Send a GET request to fetch the page content
+            # Step 2: Send a GET request to fetch the page content
             response = requests.get(url)
-            response.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
 
-            # Parse the HTML content
+            # Raise an HTTPError for bad responses (4xx and 5xx)
+            response.raise_for_status()
+
+            # Step 3: Parse the HTML content using BeautifulSoup
             soup = BeautifulSoup(response.content, 'html.parser')
 
-            # Locate the section and table
+            # Step 4: Locate the section with id "quarters"
             section = soup.find('section', {'id': 'quarters'})
             if not section:
                 raise ValueError("Section with id 'quarters' not found.")
 
+            # Step 5: Locate the table within the section
             table = section.find('table')
             if not table:
                 raise ValueError("Table in the 'quarters' section not found.")
 
-            # Extract table headers
+            # Step 6: Extract table headers
             headers = [header.text.strip() for header in table.find_all('th')]
 
-            # Extract table rows
+            # Step 7: Extract table rows
             rows = []
             for row in table.find_all('tr'):
                 columns = row.find_all('td')
                 if columns:
                     rows.append([col.text.strip() for col in columns])
 
-            # Create a DataFrame
+            # Step 8: Create a Pandas DataFrame from the extracted data
             df = pd.DataFrame(rows, columns=headers)
 
-            # Drop the last row (Raw PDF)
+            # Step 9: Clean the DataFrame by dropping the last row (e.g., "Raw PDF")
             df_cleaned = df[:-1]
+
+            # Print the cleaned DataFrame (for debugging or validation)
             print(df_cleaned)
 
-            # Define the output directory and ensure it exists
+            # Step 10: Define the output directory and ensure it exists
             output_dir = "C:\\Users\\anike\\PycharmProjects\\Automation_API_Extract\\Report"
             os.makedirs(output_dir, exist_ok=True)
 
-            # Generate a timestamp for the file name
+            # Step 11: Generate a timestamped file name for the output Excel file
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             file_name = os.path.join(output_dir, f"extracted_data_{timestamp}.xlsx")
 
-            # Save the DataFrame to an Excel file
+            # Step 12: Save the cleaned DataFrame to an Excel file
             df_cleaned.to_excel(file_name, index=False)
             print(f"Data successfully extracted and saved to {file_name}.")
 
         except Exception as e:
+            # Handle exceptions and display error messages
             print(f"An error occurred: {e}")
