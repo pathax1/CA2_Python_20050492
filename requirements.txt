@@ -1,0 +1,9 @@
+selenium~=4.26.1
+pytest~=8.3.3
+pandas~=2.2.3
+sql~=sqlalchemy
+python~=pymysql
+Microsoft~=Excel
+Browser~=Chrome
+ChromeDriver~=CompatibleWithBrowser
+Pycharm~=Community_professional
