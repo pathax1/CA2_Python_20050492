@@ -9,6 +9,9 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from utils.CommonFunctions import iaction
 from selenium.webdriver.common.keys import Keys
+import logging
+
+
 
 # ***************************************************************************************************************************************************************************************
 # Constructor Name: __init__
@@ -143,3 +146,4 @@ class HomePage:
         except Exception as e:
             # Handle exceptions and display error messages
             print(f"An error occurred: {e}")
+

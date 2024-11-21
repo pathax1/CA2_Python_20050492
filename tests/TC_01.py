@@ -20,6 +20,7 @@ from utils.data_loader import load_test_data
 from pages.HomePage import HomePage
 from selenium.webdriver.chrome.service import Service
 import requests
+import logging
 
 @pytest.fixture(scope="session")
 def config():
@@ -38,7 +39,15 @@ def driver(config):
 
 @pytest.mark.parametrize("data", load_test_data(r"C:\Users\anike\PycharmProjects\Automation_API_Extract\data\Data.xlsx", "datasheet"))
 def test_register(driver, data):
-    hp = HomePage(driver)
-    hp.click_new_account(data["email"], data["passcode"],data["Share"])  # Pass the arguments here
-    #hp.extractWebTable()
-    hp.extract_api()
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+    logger = logging.getLogger()
+    logger.info("Starting test for new account registration")
+    try:
+        hp = HomePage(driver)
+        hp.click_new_account(data["email"], data["passcode"],data["Share"])  # Pass the arguments here
+        logger.info("Account creation completed successfully")
+        #hp.extractWebTable()
+        hp.extract_api()
+    except Exception as e:
+        logger.error(f"Error during test execution: {e}")
+        raise
