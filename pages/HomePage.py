@@ -33,7 +33,8 @@ class HomePage:
         self.iseachbar="//div[@id='desktop-search']//input[@placeholder='Search for a company']"
         self.imenuitem="//a[normalize-space()='Quarters']"
         self.iWebtable="//section[@id='quarters']//table[@class='data-table responsive-text-nowrap']"
-
+        self.output_dir = None  # To store the output directory
+        self.file_name = None  # To store the latest file name
 # ***************************************************************************************************************************************************************************************
 # Function Name: click_new_account
 # Description: This function performs the actions to create a new account, search for a company, and navigate to the 'Quarters' menu item.
@@ -132,12 +133,12 @@ class HomePage:
             print(df_cleaned)
 
             # Step 10: Define the output directory and ensure it exists
-            output_dir = "C:\\Users\\anike\\PycharmProjects\\Automation_API_Extract\\Report"
-            os.makedirs(output_dir, exist_ok=True)
+            self.output_dir = "C:\\Users\\anike\\PycharmProjects\\Automation_API_Extract\\Report"
+            os.makedirs(self.output_dir, exist_ok=True)
 
             # Step 11: Generate a timestamped file name for the output Excel file
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            file_name = os.path.join(output_dir, f"extracted_data_{timestamp}.xlsx")
+            file_name = os.path.join(self.output_dir, f"extracted_data_{timestamp}.xlsx")
 
             # Step 12: Save the cleaned DataFrame to an Excel file
             df_cleaned.to_excel(file_name, index=False)
@@ -147,3 +148,69 @@ class HomePage:
             # Handle exceptions and display error messages
             print(f"An error occurred: {e}")
 
+# ***************************************************************************************************************************************************************************************
+# Function Name: iNetProfitCalculate
+# Description: This function performs comparison on the extracted quaterly results data [Q3] and the user can figure out if the net profit of the organisation has increased or not
+# Parameters:
+#   - output_dir
+# Author: Aniket Pathare | 20050492@mydbs.ie
+# Precondition:
+#   - Quaterly Report Excel spreadsheet should be available in output_dir
+# Date Created: 2024-11-22
+# ***************************************************************************************************************************************************************************************
+def iNetProfitCalculate(output_dir):
+    try:
+        # Get the latest Excel file from the output directory
+        report_files = [os.path.join(output_dir, f) for f in os.listdir(output_dir) if f.endswith(".xlsx")]
+        if not report_files:
+            return "No report files found in the specified directory."
+
+        latest_file = max(report_files, key=os.path.getctime)
+        print(f"Processing file: {latest_file}")
+
+        # Load the data from the latest Excel file
+        data = pd.read_excel(latest_file, index_col=0)
+
+        # Extract "Net Profit +" row and clean the data
+        net_profit_row = data.loc["Net Profit\xa0+"]  # Adjust row name if necessary
+        net_profit_row = net_profit_row.str.replace(",", "").astype(float)  # Convert to numeric
+
+        # Calculate total net profit for 2023 and 2024
+        net_profit_2023 = net_profit_row[["Mar 2023", "Jun 2023", "Sep 2023", "Dec 2023"]].sum()
+        net_profit_2024 = net_profit_row[["Mar 2024", "Jun 2024", "Sep 2024"]].sum()
+
+        # Calculate the percentage change
+        if net_profit_2023 != 0:
+            percentage_change = ((net_profit_2024 - net_profit_2023) / net_profit_2023) * 100
+        else:
+            percentage_change = None
+
+        # Display results
+        print(f"Net Profit for 2023: {net_profit_2023}")
+        print(f"Net Profit for 2024: {net_profit_2024}")
+        print(
+            f"Percentage Change: {percentage_change:.2f}%" if percentage_change is not None else "Undefined (2023 Net Profit is 0)")
+
+        # Prepare a results DataFrame
+        result_df = pd.DataFrame({
+            "Year": ["2023 to 2024"],
+            "Net Profit 2023": [net_profit_2023],
+            "Net Profit 2024": [net_profit_2024],
+            "Percentage Change": [
+                f"{percentage_change:.2f}%" if percentage_change is not None else "N/A"
+            ],
+            "Statement": [
+                f"Net profit {'increased' if percentage_change > 0 else 'decreased' if percentage_change < 0 else 'remained the same'} by {abs(percentage_change):.2f}%"
+                if percentage_change is not None else "Net profit data unavailable"
+            ],
+        })
+        # Save the result_df to a new sheet in the same Excel file
+        with pd.ExcelWriter(latest_file, mode="a", engine="openpyxl") as writer:
+            result_df.to_excel(writer, sheet_name="Net Profit Analysis", index=False)
+
+        print(f"Analysis successfully added to {latest_file} in the 'Net Profit Analysis' sheet.")
+        # Return the results DataFrame
+        return result_df
+
+    except Exception as e:
+        return f"An error occurred: {e}"

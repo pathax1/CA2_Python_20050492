@@ -17,8 +17,9 @@ import time
 import pytest
 from selenium import webdriver
 from utils.data_loader import load_test_data
-from pages.HomePage import HomePage
+from pages.HomePage import HomePage, iNetProfitCalculate
 from selenium.webdriver.chrome.service import Service
+
 import requests
 import logging
 
@@ -48,6 +49,9 @@ def test_register(driver, data):
         logger.info("Account creation completed successfully")
         #hp.extractWebTable()
         hp.extract_api()
+        result = iNetProfitCalculate(hp.output_dir)
+        print(result)
+
     except Exception as e:
         logger.error(f"Error during test execution: {e}")
         raise

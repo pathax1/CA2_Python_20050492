@@ -10,8 +10,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-
+import os
+import pandas as pd
+from datetime import datetime
+import pandas as pd
 
 # ***************************************************************************************************************************************************************************************
 # Function Names:highlight_element
@@ -33,7 +35,6 @@ def highlight_element(driver, element, color="red", border_width="3px"):
     import time
     time.sleep(0.5)
     driver.execute_script(f"arguments[0].setAttribute('style', arguments[1]);", element, original_style)
-
 
 # ***************************************************************************************************************************************************************************************
 # Function Names:iaction
