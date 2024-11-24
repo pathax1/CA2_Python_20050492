@@ -16,27 +16,33 @@
 import time
 import pytest
 from selenium import webdriver
-from utils.data_loader import load_test_data
-from pages.HomePage import HomePage, iNetProfitCalculate
-from selenium.webdriver.chrome.service import Service
 
+from pages.APIExtractor import APIExtractor
+from utils.data_loader import load_test_data
+from pages.WebScrapper import WebScrapper, iNetProfitCalculate
+from selenium.webdriver.chrome.service import Service
 import requests
 import logging
 
 @pytest.fixture(scope="session")
 def config():
+    logging.info("Loading test configuration for the session")
     return {
         "base_url": "https://www.screener.in/"
     }
 
 @pytest.fixture
 def driver(config):
+    logging.info("Initializing WebDriver for test execution")
     service = Service("C:/Users/anike/PycharmProjects/Automation_API_Extract/chromedriver.exe")
     idriver = webdriver.Chrome(service=service)
     idriver.get(config["base_url"])
+    logging.info("Navigated to base URL")
     idriver.maximize_window()
+    logging.info("Browser window maximized")
     yield idriver
-   # idriver.quit()
+    logging.info("Closing WebDriver after test execution")
+    # idriver.quit()
 
 @pytest.mark.parametrize("data", load_test_data(r"C:\Users\anike\PycharmProjects\Automation_API_Extract\data\Data.xlsx", "datasheet"))
 def test_register(driver, data):
@@ -44,13 +50,24 @@ def test_register(driver, data):
     logger = logging.getLogger()
     logger.info("Starting test for new account registration")
     try:
-        hp = HomePage(driver)
-        hp.click_new_account(data["email"], data["passcode"],data["Share"])  # Pass the arguments here
+        logger.info("Initializing WebScrapper for browser interaction")
+        wc = WebScrapper(driver)
+        logger.info(f"Attempting account registration with email: {data['email']}")
+        wc.click_new_account(data["email"], data["passcode"], data["Share"])
         logger.info("Account creation completed successfully")
-        #hp.extractWebTable()
-        hp.extract_api()
-        result = iNetProfitCalculate(hp.output_dir)
-        print(result)
+
+        logger.info("Starting web scraping process")
+        wc.webscrapperextract()
+        logger.info("Web scraping completed successfully")
+
+        logger.info("Calculating net profit from extracted data")
+        result = iNetProfitCalculate(wc.output_dir)
+        logger.info(f"Net profit calculation completed with result: {result}")
+
+        logger.info("Initializing API extraction process")
+        api = APIExtractor()
+        api.apiextract()
+        logger.info("API extraction process completed successfully")
 
     except Exception as e:
         logger.error(f"Error during test execution: {e}")

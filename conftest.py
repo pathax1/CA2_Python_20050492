@@ -30,7 +30,7 @@ def pytest_sessionfinish(session, exitstatus):
 # Hook to capture screenshots for failed tests and enrich the HTML report
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    # Hook to add screenshots on test failures
+    # Hook to add screenshots only on test failures
     outcome = yield
     report = outcome.get_result()
     if report.when == "call" and report.failed:
@@ -46,7 +46,7 @@ def pytest_runtest_makereport(item, call):
             )
             driver.save_screenshot(screenshot_path)
 
-            # Add the screenshot to the report (requires pytest-html)
+            # Add the screenshot to the report
             if hasattr(report, "extra"):
                 from pytest_html import extras
                 report.extra = getattr(report, "extra", [])

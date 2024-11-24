@@ -21,7 +21,7 @@ import logging
 # Precondition: User should populate the desired values to enter the datasheet prior to the execution
 # Date Created: 2024-11-17
 # ***************************************************************************************************************************************************************************************
-class HomePage:
+class WebScrapper:
     def __init__(self, driver):
         self.driver = driver
         self.iNewAccount = "//a[@class='button account button-secondary']"
@@ -89,7 +89,7 @@ class HomePage:
 # Date Created: 2024-11-17
 # ***************************************************************************************************************************************************************************************
 
-    def extract_api(self):
+    def webscrapperextract(self):
         try:
             # Step 1: Get the current URL from the Selenium driver
             url = self.driver.current_url
