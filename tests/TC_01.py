@@ -13,16 +13,19 @@
 #   - The webpage (https://www.screener.in/) should be accessible.
 # Date Created: 2024-11-17
 # ****************************************************************************************************************************************************************************************
+
 import time
 import pytest
+import logging
 from selenium import webdriver
-
+from selenium.webdriver.chrome.service import Service
 from pages.APIExtractor import APIExtractor
+from utils.DB_Migration import DBMigration
 from utils.data_loader import load_test_data
 from pages.WebScrapper import WebScrapper, iNetProfitCalculate
-from selenium.webdriver.chrome.service import Service
-import requests
-import logging
+import sqlite3
+import pandas as pd
+
 
 @pytest.fixture(scope="session")
 def config():
@@ -30,6 +33,7 @@ def config():
     return {
         "base_url": "https://www.screener.in/"
     }
+
 
 @pytest.fixture
 def driver(config):
@@ -42,7 +46,8 @@ def driver(config):
     logging.info("Browser window maximized")
     yield idriver
     logging.info("Closing WebDriver after test execution")
-    # idriver.quit()
+    idriver.quit()
+
 
 @pytest.mark.parametrize("data", load_test_data(r"C:\Users\anike\PycharmProjects\Automation_API_Extract\data\Data.xlsx", "datasheet"))
 def test_register(driver, data):
@@ -50,6 +55,7 @@ def test_register(driver, data):
     logger = logging.getLogger()
     logger.info("Starting test for new account registration")
     try:
+        # Initialize WebScrapper and perform operations
         logger.info("Initializing WebScrapper for browser interaction")
         wc = WebScrapper(driver)
         logger.info(f"Attempting account registration with email: {data['email']}")
@@ -60,14 +66,32 @@ def test_register(driver, data):
         wc.webscrapperextract()
         logger.info("Web scraping completed successfully")
 
+        # Net Profit Calculation
         logger.info("Calculating net profit from extracted data")
         result = iNetProfitCalculate(wc.output_dir)
         logger.info(f"Net profit calculation completed with result: {result}")
 
+        # API Extraction
         logger.info("Initializing API extraction process")
         api = APIExtractor()
         api.apiextract()
         logger.info("API extraction process completed successfully")
+
+        # Database Migration
+        logger.info("Starting database migration process")
+        output_directory = wc.output_dir  # Assuming WebScrapper provides the output directory
+        database_path = r"C:\Users\anike\PycharmProjects\Automation_API_Extract\data_analysis.db"  # Define your DB path
+        db_migration = DBMigration(output_dir=output_directory, db_path=database_path)
+
+        # Save data from the latest file to SQLite
+        logger.info("Saving data from the latest file into SQLite database")
+        db_migration.save_to_sqlite()
+        logger.info("Database migration completed successfully")
+
+        # Integration Testing
+        logger.info("Performing integration testing on the database")
+        db_migration.integration_testing()
+        logger.info("Integration testing completed successfully")
 
     except Exception as e:
         logger.error(f"Error during test execution: {e}")

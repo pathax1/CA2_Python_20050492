@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55f69a58-7e60-48a6-8ae6-bc2fcdb585e7" name="Changes" comment="22nd Nov Changes">
-      <change afterPath="$PROJECT_DIR$/pages/APIExtractor.py" afterDir="false" />
+    <list default="true" id="55f69a58-7e60-48a6-8ae6-bc2fcdb585e7" name="Changes" comment="24nd Nov Changes">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/DB_Migration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/WebScrapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/Register.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/WebScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/WebScrapper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/TC_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TC_01.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,24 +50,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Python tests for TC_01.test_register.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in TC_01.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.TC_01.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Python tests for TC_01.test_register.executor": "Run",
+    "Python tests.Python tests in TC_01.py.executor": "Run",
+    "Python.TC_01.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
-}</component>
-  <component name="RunManager" selected="Python tests.Python tests for TC_01.test_register">
+}]]></component>
+  <component name="RunManager">
     <configuration name="TC_01" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Automation_API_Extract" />
       <option name="ENV_FILES" value="" />
@@ -125,9 +131,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.TC_01" />
         <item itemvalue="Python tests.Python tests for TC_01.test_register" />
         <item itemvalue="Python tests.Python tests in TC_01.py" />
-        <item itemvalue="Python.TC_01" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +167,8 @@
       <workItem from="1732438504787" duration="27000" />
       <workItem from="1732442236116" duration="30000" />
       <workItem from="1732445058831" duration="63000" />
-      <workItem from="1732473422266" duration="9029000" />
+      <workItem from="1732473422266" duration="10595000" />
+      <workItem from="1732532946978" duration="6339000" />
     </task>
     <task id="LOCAL-00001" summary="17 Nov">
       <option name="closed" value="true" />
@@ -195,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732271643382</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="24nd Nov Changes">
+      <option name="closed" value="true" />
+      <created>1732491636892</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732491636892</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,10 +231,11 @@
     <MESSAGE value="17 Nov" />
     <MESSAGE value="21 Nov." />
     <MESSAGE value="22nd Nov Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="22nd Nov Changes" />
+    <MESSAGE value="24nd Nov Changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="24nd Nov Changes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Automation_API_Extract$TC_01.coverage" NAME="TC_01 Coverage Results" MODIFIED="1731669702098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Automation_API_Extract$.coverage" NAME=" Coverage Results" MODIFIED="1732491091439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Automation_API_Extract$TC_01.coverage" NAME="TC_01 Coverage Results" MODIFIED="1732540479171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Automation_API_Extract$.coverage" NAME=" Coverage Results" MODIFIED="1732541690715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>
