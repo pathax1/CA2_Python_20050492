@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55f69a58-7e60-48a6-8ae6-bc2fcdb585e7" name="Changes" comment="24nd Nov Changes">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/DB_Migration.py" afterDir="false" />
+    <list default="true" id="55f69a58-7e60-48a6-8ae6-bc2fcdb585e7" name="Changes" comment="25th Nov Changes,Updated DB">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/WebScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/WebScrapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/TC_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TC_01.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_analysis.db" beforeDir="false" afterPath="$PROJECT_DIR$/data_analysis.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +164,7 @@
       <workItem from="1732442236116" duration="30000" />
       <workItem from="1732445058831" duration="63000" />
       <workItem from="1732473422266" duration="10595000" />
-      <workItem from="1732532946978" duration="6339000" />
+      <workItem from="1732532946978" duration="10713000" />
     </task>
     <task id="LOCAL-00001" summary="17 Nov">
       <option name="closed" value="true" />
@@ -210,7 +206,23 @@
       <option name="project" value="LOCAL" />
       <updated>1732491636892</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="25th Nov Changes,Updated DB">
+      <option name="closed" value="true" />
+      <created>1732541919309</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732541919309</updated>
+    </task>
+    <task id="LOCAL-00007" summary="25th Nov Changes,Updated DB">
+      <option name="closed" value="true" />
+      <created>1732541932977</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732541932977</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,10 +244,11 @@
     <MESSAGE value="21 Nov." />
     <MESSAGE value="22nd Nov Changes" />
     <MESSAGE value="24nd Nov Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="24nd Nov Changes" />
+    <MESSAGE value="25th Nov Changes,Updated DB" />
+    <option name="LAST_COMMIT_MESSAGE" value="25th Nov Changes,Updated DB" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Automation_API_Extract$TC_01.coverage" NAME="TC_01 Coverage Results" MODIFIED="1732540479171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Automation_API_Extract$.coverage" NAME=" Coverage Results" MODIFIED="1732541690715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Automation_API_Extract$.coverage" NAME=" Coverage Results" MODIFIED="1732551071175" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>
