@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55f69a58-7e60-48a6-8ae6-bc2fcdb585e7" name="Changes" comment="7 Dec , Added Comments,Aligned Code and organised">
+    <list default="true" id="55f69a58-7e60-48a6-8ae6-bc2fcdb585e7" name="Changes" comment="7 Dec ,Created Readme and updated the aboslute path to root directory path for smoother execution">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_analysis.db" beforeDir="false" afterPath="$PROJECT_DIR$/data_analysis.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/APIExtractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/APIExtractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/WebScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/WebScrapper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/TC_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TC_01.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/CommonFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/CommonFunctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/DB_Migration.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/DB_Migration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_loader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +197,7 @@
       <workItem from="1733481824789" duration="67000" />
       <workItem from="1733486828554" duration="270000" />
       <workItem from="1733523565212" duration="4454000" />
-      <workItem from="1733572137238" duration="7236000" />
+      <workItem from="1733572137238" duration="9723000" />
     </task>
     <task id="LOCAL-00001" summary="17 Nov">
       <option name="closed" value="true" />
@@ -274,7 +279,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733583101148</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="7 Dec ,Created Readme and updated the aboslute path to root directory path for smoother execution">
+      <option name="closed" value="true" />
+      <created>1733586794555</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733586794555</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,12 +312,13 @@
     <MESSAGE value="25th Nov Changes,Updated DB" />
     <MESSAGE value="26th Nov Changes,Updated DB" />
     <MESSAGE value="7 Dec , Added Comments,Aligned Code and organised" />
-    <option name="LAST_COMMIT_MESSAGE" value="7 Dec , Added Comments,Aligned Code and organised" />
+    <MESSAGE value="7 Dec ,Created Readme and updated the aboslute path to root directory path for smoother execution" />
+    <option name="LAST_COMMIT_MESSAGE" value="7 Dec ,Created Readme and updated the aboslute path to root directory path for smoother execution" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Automation_API_Extract$DB_Migration.coverage" NAME="DB_Migration Coverage Results" MODIFIED="1733481836030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/Automation_API_Extract$TC_01.coverage" NAME="TC_01 Coverage Results" MODIFIED="1733434875244" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Automation_API_Extract$.coverage" NAME=" Coverage Results" MODIFIED="1733585817875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Automation_API_Extract$.coverage" NAME=" Coverage Results" MODIFIED="1733588751782" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Automation_API_Extract$WebScrapper.coverage" NAME="WebScrapper Coverage Results" MODIFIED="1733580584014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pages" />
   </component>
 </project>

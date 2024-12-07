@@ -8,4 +8,4 @@ User must be aware of the Stock Name which he wants to search on the website Scr
 Once the execution is completed user must navigate to Reports folder 
 User would be able to see the latest execution results excel spreadsheet containing all the data
 User can also view html reports under tests>Reports 
-The Valid GIT link is : 
+The Valid GIT link is : https://github.com/pathax1/CA2_Python_20050492/tree/master

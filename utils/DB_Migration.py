@@ -7,9 +7,10 @@ class DBMigration:
 
 
     def __init__(self, output_dir, db_path="data_analysis.db"):
-
-        self.output_dir = output_dir  # Directory where Excel files are stored
-        self.db_path = db_path  # Path to the SQLite database file
+        # Directory where Excel files are stored
+        self.output_dir = output_dir
+        # Path to the SQLite database file
+        self.db_path = db_path
 
     # ***************************************************************************************************************************************************************************************
     # Function Name: save_to_sqlite
@@ -58,13 +59,15 @@ class DBMigration:
                 df = pd.read_excel(latest_file, sheet_name=sheet_name)
 
                 # Clean up column names for compatibility with SQLite
+                # Replace spaces and "+" symbols
                 df.columns = [
-                    str(col).replace(" ", "_").replace("+", "Plus")  # Replace spaces and "+" symbols
+                    str(col).replace(" ", "_").replace("+", "Plus")
                     for col in df.columns
                 ]
 
                 # Use the sheet name to create a table name for SQLite
-                table_name = sheet_name.replace(" ", "_").lower()  # Standardize table name
+                # Standardize table name
+                table_name = sheet_name.replace(" ", "_").lower()
 
                 # Save the data from the sheet to the SQLite database
                 df.to_sql(table_name, conn, if_exists="replace", index=False)
@@ -150,7 +153,8 @@ class DBMigration:
                     # Check if certain columns are numeric
                     if df[col].dtype == "object" and col.lower() in ["net_profit", "value"]:
                         try:
-                            df[col].astype(float)  # Try converting the column to float
+                            #Converting the column to float
+                            df[col].astype(float)
                             print(f"Column '{col}' in table '{table}' is numeric.")
                         except ValueError:
                             print(f"Column '{col}' in table '{table}' is NOT numeric.")

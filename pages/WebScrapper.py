@@ -30,8 +30,8 @@ class WebScrapper:
         self.iseachbar="//div[@id='desktop-search']//input[@placeholder='Search for a company']"
         self.imenuitem="//a[normalize-space()='Quarters']"
         self.iWebtable="//section[@id='quarters']//table[@class='data-table responsive-text-nowrap']"
-        self.output_dir = None  # To store the output directory
-        self.file_name = None  # To store the latest file name
+        self.output_dir = None
+        self.file_name = None
 # ***************************************************************************************************************************************************************************************
 # Function Name: click_new_account
 # Description: This function performs the actions to create a new account, search for a company, and navigate to the 'Quarters' menu item.

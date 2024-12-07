@@ -46,13 +46,14 @@ class APIExtractor:
         cleaned_data = []
         for entry in raw_data.get('datasets', []):
             for value in entry.get('values', []):
-                if len(value) == 2:  # Ensure the value has expected structure
+                if len(value) == 2:
                     cleaned_data.append({
                         "Date": value[0],
                         "Value": value[1]
                     })
         df_cleaned = pd.DataFrame(cleaned_data)
-        df_cleaned['Date'] = pd.to_datetime(df_cleaned['Date'])  # Convert Date column to datetime
+        # Convert Date column to datetime
+        df_cleaned['Date'] = pd.to_datetime(df_cleaned['Date'])
         return df_cleaned
 
     # ***************************************************************************************************************************************************************************************

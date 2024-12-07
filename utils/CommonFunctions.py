@@ -30,8 +30,6 @@ def highlight_element(driver, element, color="red", border_width="3px"):
 
     # Apply highlight
     driver.execute_script(f"arguments[0].setAttribute('style', arguments[1]);", element, highlight_style)
-
-    # Revert back to original style after a brief pause
     import time
     time.sleep(0.5)
     driver.execute_script(f"arguments[0].setAttribute('style', arguments[1]);", element, original_style)
@@ -62,7 +60,7 @@ def iaction(driver, element, identifywith, iProperty, ivalue=None):
     if identifywith not in locate_by:
         return f"Invalid identification method: {identifywith}"
 
-    # Get the Selenium locator strategy
+    # Get the Selenium locator choice
     by = locate_by[identifywith]
 
     try:
