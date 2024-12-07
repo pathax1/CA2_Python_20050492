@@ -1,18 +1,13 @@
 #Import Essential Libraries to perform execution
 import os
 import time
-from struct import pack_into
 import pandas as pd
-import pytest
 import requests
 from datetime import datetime
 from bs4 import BeautifulSoup
-from selenium.webdriver.common.by import By
 from utils.CommonFunctions import iaction
 from selenium.webdriver.common.keys import Keys
-import logging
-import unittest
-from unittest.mock import patch, MagicMock
+
 
 
 # ***************************************************************************************************************************************************************************************

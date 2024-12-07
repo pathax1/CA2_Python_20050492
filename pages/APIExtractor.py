@@ -1,8 +1,6 @@
 import os
 import pandas as pd
-from datetime import datetime
 import requests
-from openpyxl import load_workbook
 
 class APIExtractor:
     def __init__(self):

@@ -23,9 +23,6 @@ from pages.APIExtractor import APIExtractor
 from utils.DB_Migration import DBMigration
 from utils.data_loader import load_test_data
 from pages.WebScrapper import WebScrapper, iNetProfitCalculate
-import sqlite3
-import pandas as pd
-
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
