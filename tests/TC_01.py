@@ -13,7 +13,7 @@
 #   - The webpage (https://www.screener.in/) should be accessible.
 # Date Created: 2024-11-17
 # ****************************************************************************************************************************************************************************************
-
+import os
 import time
 import pytest
 import logging
@@ -27,6 +27,14 @@ import sqlite3
 import pandas as pd
 
 
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Define paths dynamically based on the project structure
+CHROMEDRIVER_PATH = os.path.join(PROJECT_ROOT, "chromedriver.exe")
+DATA_FILE_PATH = os.path.join(PROJECT_ROOT, "data", "Data.xlsx")
+DATABASE_PATH = os.path.join(PROJECT_ROOT, "data_analysis.db")
+REPORT_DIR = os.path.join(PROJECT_ROOT, "tests", "Report")
+
 @pytest.fixture(scope="session")
 def config():
     logging.info("Loading test configuration for the session")
@@ -38,7 +46,7 @@ def config():
 @pytest.fixture
 def driver(config):
     logging.info("Initializing WebDriver for test execution")
-    service = Service("C:/Users/anike/PycharmProjects/Automation_API_Extract/chromedriver.exe")
+    service = Service(CHROMEDRIVER_PATH)
     idriver = webdriver.Chrome(service=service)
     idriver.get(config["base_url"])
     logging.info("Navigated to base URL")
@@ -48,8 +56,10 @@ def driver(config):
     logging.info("Closing WebDriver after test execution")
     idriver.quit()
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-@pytest.mark.parametrize("data", load_test_data(r"C:\Users\anike\PycharmProjects\Automation_API_Extract\data\Data.xlsx", "datasheet"))
+
+@pytest.mark.parametrize("data", load_test_data(DATA_FILE_PATH, "datasheet"))
 def test_register(driver, data):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
     logger = logging.getLogger()
@@ -80,8 +90,8 @@ def test_register(driver, data):
         # Database Migration
         logger.info("Starting database migration process")
         output_directory = wc.output_dir
-        database_path = r"C:\Users\anike\PycharmProjects\Automation_API_Extract\data_analysis.db"  # Define your DB path
-        db_migration = DBMigration(output_dir=output_directory, db_path=database_path)
+        #database_path = r"C:\Users\anike\PycharmProjects\Automation_API_Extract\data_analysis.db"  # Define your DB path
+        db_migration = DBMigration(output_dir=output_directory, db_path=DATABASE_PATH)
 
         # Save data from the latest file to SQLite
         logger.info("Saving data from the latest file into SQLite database")
