@@ -3,6 +3,7 @@ import os
 import time
 from struct import pack_into
 import pandas as pd
+import pytest
 import requests
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -10,6 +11,10 @@ from selenium.webdriver.common.by import By
 from utils.CommonFunctions import iaction
 from selenium.webdriver.common.keys import Keys
 import logging
+import unittest
+from unittest.mock import patch, MagicMock
+
+
 # ***************************************************************************************************************************************************************************************
 # Constructor Name: __init__
 # Description: The constructor is used to store all the Web Element Properties
@@ -90,6 +95,7 @@ class WebScrapper:
         try:
             # Step 1: Get the current URL from the Selenium driver
             url = self.driver.current_url
+            assert url is not None and url.startswith("http"), "Invalid URL retrieved."
 
             # Step 2: Send a GET request to fetch the page content
             response = requests.get(url)
@@ -97,18 +103,21 @@ class WebScrapper:
             # Raise an HTTPError for bad responses (4xx and 5xx)
             response.raise_for_status()
 
+
             # Step 3: Parse the HTML content using BeautifulSoup
             soup = BeautifulSoup(response.content, 'html.parser')
 
             # Step 4: Locate the section with id "quarters"
             section = soup.find('section', {'id': 'quarters'})
             if not section:
-                raise ValueError("Section with id 'quarters' not found.")
+                assert soup.find('section', {'id': 'quarters'}), "Section with id 'quarters' not found in the HTML."
+                #raise ValueError("Section with id 'quarters' not found.")
 
             # Step 5: Locate the table within the section
             table = section.find('table')
             if not table:
-                raise ValueError("Table in the 'quarters' section not found.")
+                assert section.find('table'), "Table not found within the 'quarters' section."
+                #raise ValueError("Table in the 'quarters' section not found.")
 
             # Step 6: Extract table headers
             headers = [header.text.strip() for header in table.find_all('th')]
@@ -122,6 +131,10 @@ class WebScrapper:
 
             # Step 8: Create a Pandas DataFrame from the extracted data
             df = pd.DataFrame(rows, columns=headers)
+
+            #Validate if the extracted Dataframe is not empty
+            assert not df.empty, "Extracted DataFrame is empty."
+            assert all(col in df.columns for col in headers), "DataFrame does not contain expected headers."
 
             # Step 9: Clean the DataFrame by dropping the last row (e.g., "Raw PDF")
             df_cleaned = df[:-1]
@@ -145,9 +158,11 @@ class WebScrapper:
             # Handle exceptions and display error messages
             print(f"An error occurred: {e}")
 
+
+
 # ***************************************************************************************************************************************************************************************
 # Function Name: iNetProfitCalculate
-# Description: This function performs comparison on the extracted quaterly results data [Q3] and the user can figure out if the net profit of the organisation has increased or not
+# Description: This function performs comparison on the extracted quaterly results data [Q3] and the user can figure out if the net profit of the organisation has increased or not and perform unit tests
 # Parameters:
 #   - output_dir
 # Author: Aniket Pathare | 20050492@mydbs.ie
@@ -160,16 +175,18 @@ def iNetProfitCalculate(output_dir):
         # Get the latest Excel file from the output directory
         report_files = [os.path.join(output_dir, f) for f in os.listdir(output_dir) if f.endswith(".xlsx")]
         if not report_files:
-            return "No report files found in the specified directory."
+            assert report_files, "No Excel files found in the specified directory."
 
         latest_file = max(report_files, key=os.path.getctime)
         print(f"Processing file: {latest_file}")
 
         # Load the data from the latest Excel file
         data = pd.read_excel(latest_file, index_col=0)
+        assert not data.empty, "The Excel file is empty or cannot be read."
 
         # Extract "Net Profit +" row and clean the data
         net_profit_row = data.loc["Net Profit\xa0+"]  # Adjust row name if necessary
+        assert not net_profit_row.empty, "The 'Net Profit' row is empty."
         net_profit_row = net_profit_row.str.replace(",", "").astype(float)  # Convert to numeric
 
         # Calculate total net profit for 2023 and 2024
@@ -211,4 +228,5 @@ def iNetProfitCalculate(output_dir):
         return result_df
 
     except Exception as e:
-        return f"An error occurred: {e}"
+        print(f"An error occurred: {e}")
+        raise RuntimeError(f"Error in Net Profit Calculation: {e}")

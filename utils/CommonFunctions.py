@@ -58,6 +58,7 @@ def iaction(driver, element, identifywith, iProperty, ivalue=None):
 
     # Validate the locator method
     if identifywith not in locate_by:
+        assert identifywith in locate_by, f"Invalid identification method: {identifywith}"
         return f"Invalid identification method: {identifywith}"
 
     # Get the Selenium locator choice
@@ -112,4 +113,4 @@ def iaction(driver, element, identifywith, iProperty, ivalue=None):
                 return f"Invalid element type: {element}"
 
     except Exception as e:
-        return f"Error performing action on {element} using {identifywith}: {str(e)}"
+        assert False, f"Error performing action on {element} using {identifywith}: {str(e)}"
