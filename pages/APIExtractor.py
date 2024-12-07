@@ -21,6 +21,24 @@ class APIExtractor:
         }
         self.output_dir = "C:\\Users\\anike\\PycharmProjects\\Automation_API_Extract\\Report"
 
+    # ***************************************************************************************************************************************************************************************
+    # Function Name: clean_data
+    # Description: This function processes and organizes raw data retrieved from an API into a structured tabular format with two columns: 'Date' and 'Value'.
+    # Steps:
+    #   1. Iterate through the 'datasets' in the raw data.
+    #   2. Extract 'values' from each dataset and validate their structure.
+    #   3. Append valid 'Date' and 'Value' pairs to a list.
+    #   4. Convert the cleaned list into a Pandas DataFrame.
+    #   5. Format the 'Date' column as a datetime object for consistency.
+    # Parameters:
+    #   - raw_data: A dictionary containing the raw API data to be cleaned and structured.
+    # Returns:
+    #   - df_cleaned: A Pandas DataFrame containing the cleaned data with 'Date' and 'Value' columns.
+    # Author: Aniket Pathare | 20050492@mydbs.ie
+    # Precondition: Input data must include a 'datasets' key with nested 'values' lists, each containing exactly two elements (Date and Value).
+    # Date Created: 2024-11-17
+    # ***************************************************************************************************************************************************************************************
+
     def clean_data(self, raw_data):
         """
         Cleans and organizes the raw API data into a tabular format with only Date and Value columns.
@@ -36,6 +54,21 @@ class APIExtractor:
         df_cleaned = pd.DataFrame(cleaned_data)
         df_cleaned['Date'] = pd.to_datetime(df_cleaned['Date'])  # Convert Date column to datetime
         return df_cleaned
+
+    # ***************************************************************************************************************************************************************************************
+    # Function Name: apiextract
+    # Description: This function fetches data from a given API, cleans and organizes the data, and appends it to the most recent Excel file in a specified directory.
+    # Steps:
+    #   1. Send a GET request to the API.
+    #   2. Parse the JSON response and validate the status code.
+    #   3. Clean and structure the data to retain relevant columns.
+    #   4. Identify the latest Excel file in the output directory based on the timestamp.
+    #   5. Append the cleaned data as a new sheet in the existing Excel file.
+    # Parameters: None
+    # Author: Aniket Pathare | 20050492@mydbs.ie
+    # Precondition: The output directory should contain at least one Excel file, and the API should be accessible with valid credentials.
+    # Date Created: 2024-11-17
+    # ***************************************************************************************************************************************************************************************
 
     def apiextract(self):
         try:

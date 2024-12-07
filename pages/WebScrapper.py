@@ -200,6 +200,7 @@ def iNetProfitCalculate(output_dir):
                 f"Net profit {'increased' if percentage_change > 0 else 'decreased' if percentage_change < 0 else 'remained the same'} by {abs(percentage_change):.2f}%"
                 if percentage_change is not None else "Net profit data unavailable"
             ],
+
         })
         # Save the result_df to a new sheet in the same Excel file
         with pd.ExcelWriter(latest_file, mode="a", engine="openpyxl") as writer:

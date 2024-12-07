@@ -79,7 +79,7 @@ def test_register(driver, data):
 
         # Database Migration
         logger.info("Starting database migration process")
-        output_directory = wc.output_dir  # Assuming WebScrapper provides the output directory
+        output_directory = wc.output_dir
         database_path = r"C:\Users\anike\PycharmProjects\Automation_API_Extract\data_analysis.db"  # Define your DB path
         db_migration = DBMigration(output_dir=output_directory, db_path=database_path)
 

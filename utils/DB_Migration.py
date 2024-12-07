@@ -4,25 +4,33 @@ import os
 
 
 class DBMigration:
-    """
-    A class to handle data migration from Excel files to an SQLite database and perform integration testing.
-    """
+
 
     def __init__(self, output_dir, db_path="data_analysis.db"):
-        """
-        Initialize the DBMigration class.
 
-        Parameters:
-        - output_dir: Directory containing the Excel files.
-        - db_path: Path to the SQLite database file.
-        """
         self.output_dir = output_dir  # Directory where Excel files are stored
         self.db_path = db_path  # Path to the SQLite database file
 
+    # ***************************************************************************************************************************************************************************************
+    # Function Name: save_to_sqlite
+    # Description: This function processes the latest Excel file from a specified output directory, extracts data from all its sheets, and saves the data to an SQLite database.
+    # Steps:
+    #   1. Establish a connection to the SQLite database (creates a new file if it doesn't exist).
+    #   2. Fetch all Excel files in the output directory.
+    #   3. Identify the most recently modified Excel file.
+    #   4. Read the file and iterate through all its sheets.
+    #   5. Standardize column names for SQLite compatibility.
+    #   6. Save data from each sheet as a table in the SQLite database.
+    #   7. Commit the changes and close the database connection.
+    # Parameters: None
+    # Returns: None
+    # Author: Aniket Pathare | 20050492@mydbs.ie
+    # Precondition: The output directory should contain at least one Excel file, and the SQLite database path should be valid and accessible.
+    # Date Created: 2024-11-17
+    # ***************************************************************************************************************************************************************************************
+
     def save_to_sqlite(self):
-        """
-        Saves the extracted data from the latest Excel file in the output directory into an SQLite database.
-        """
+
         try:
             # Establish a connection to the SQLite database (creates the file if it doesn't exist)
             conn = sqlite3.connect(self.db_path)
@@ -72,10 +80,28 @@ class DBMigration:
             # Catch and print any errors that occur during the process
             print(f"An error occurred: {e}")
 
+    # ***************************************************************************************************************************************************************************************
+    # Function Name: integration_testing
+    # Description: This function performs integration testing on an SQLite database by validating table existence, inspecting data integrity, and
+    #              checking for null values and logical inconsistencies within the data.
+    # Steps:
+    #   1. Establish a connection to the SQLite database and retrieve all table names.
+    #   2. Check if any tables exist in the database. If none, notify the user and exit.
+    #   3. For each table:
+    #       - Fetch the first 5 rows and display a sample of the data.
+    #       - Check if the table contains any null values.
+    #       - Perform logical checks on columns to determine if specific ones are numeric (e.g., "net_profit", "value").
+    #   4. Summarize results for each table and highlight issues such as null values or non-numeric columns where numeric data is expected.
+    #   5. Close the database connection after testing is completed.
+    # Parameters: None
+    # Returns: None
+    # Author: Aniket Pathare | 20050492@mydbs.ie
+    # Precondition: The database file should exist, and tables should contain data for meaningful testing. Column names must follow conventions
+    #               (e.g., relevant numeric columns should be named accordingly).
+    # Date Created: 2024-11-17
+    # ***************************************************************************************************************************************************************************************
+
     def integration_testing(self):
-        """
-        Performs integration testing on the SQLite database.
-        """
         try:
             # Establish a connection to the SQLite database
             conn = sqlite3.connect(self.db_path)
